@@ -1,0 +1,42 @@
+class Storage{
+    static addfilmtostorage (newfilm) {
+        let films=this.getfilmfromstrage();
+
+        films.push(newfilm);
+        localStorage.setItem("films",JSON.stringify(films));
+    }
+
+
+    static getfilmfromstrage(){
+        let films;
+
+        if(localStorage.getItem("films")===null){
+            films=[];
+        }
+        else{
+            films=JSON.parse(localStorage.getItem("films"));
+        }
+
+        return films;
+    }
+
+
+    static deletefilmfromstorage (filmtitle) {
+        let films=this.getfilmfromstrage();
+        films.forEach(function(film,index) {
+            if(film.title===filmtitle){
+                films.splice(index,1);
+            }
+        });
+        localStorage.setItem("films",JSON.stringify(films));
+        
+    }
+
+
+    static clearallfilmsfromstorage () {
+        localStorage.removeItem("films")
+        
+    }
+}
+
+
